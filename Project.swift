@@ -1,29 +1,16 @@
 import ProjectDescription
 
-/*
-                +-------------+
-                |             |
-                |     App     | Contains ReferenceWallet App target and ReferenceWallet unit-test target
-                |             |
-         +------+-------------+-------+
-         |         depends on         |
-         |                            |
- +----v-----+                   +-----v-----+
- |          |                   |           |
- |   Kit    |                   |     UI    |   Two independent frameworks to share code and start modularising your app
- |          |                   |           |
- +----------+                   +-----------+
-
- */
-
-// MARK: - Project
-
 let project = Project(
     name: "ReferenceWallet",
     organizationName: "spruceid.com",
+    packages: [
+        // .package(url: "https://github.com/spruceid/wallet-sdk-swift", from: "0.0.2"),
+        .package(path: "../wallet-sdk-swift")
+    ],
     settings: .settings(base: [
         "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
-        "ENABLE_MODULE_VERIFIER": "YES"
+        "ENABLE_MODULE_VERIFIER": "YES",
+        "DEVELOPMENT_TEAM": "FZVYR3KYL4"
     ]),
     targets: [
         Target(
@@ -31,11 +18,14 @@ let project = Project(
             destinations: [.iPhone],
             product: .app,
             bundleId: "com.spruceid.wallet",
-            deploymentTargets: .iOS("14.0"),
-            infoPlist: .default,
+            deploymentTargets: .iOS("16.0"),
+            infoPlist: .extendingDefault(with: [
+                "CFBundleDisplayName": "SpruceID Wallet",
+                "NSBluetoothAlwaysUsageDescription": "Secure transmission of mobile DL data",
+                "UILaunchScreen": [:]
+            ]),
             sources: ["Targets/App/Sources/**"],
             dependencies: [
-                .external(name: "WalletSdk"),
                 .target(name: "AppKit"),
                 .target(name: "AppUI"),
             ]
@@ -45,7 +35,7 @@ let project = Project(
             destinations: [.iPhone],
             product: .framework,
             bundleId: "com.spruceid.wallet.kit",
-            deploymentTargets: .iOS("14.0"),
+            deploymentTargets: .iOS("16.0"),
             infoPlist: .default,
             sources: ["Targets/AppKit/Sources/**"],
             dependencies: [ ]
@@ -55,7 +45,7 @@ let project = Project(
             destinations: [.iPhone],
             product: .unitTests,
             bundleId: "com.spruceid.wallet.kittests",
-            deploymentTargets: .iOS("14.0"),
+            deploymentTargets: .iOS("16.0"),
             infoPlist: .default,
             sources: ["Targets/AppKit/Tests/**"],
             dependencies: [
@@ -67,17 +57,19 @@ let project = Project(
             destinations: [.iPhone],
             product: .framework,
             bundleId: "com.spruceid.wallet.ui",
-            deploymentTargets: .iOS("14.0"),
+            deploymentTargets: .iOS("16.0"),
             infoPlist: .default,
             sources: ["Targets/AppUI/Sources/**"],
-            dependencies: [ ]
+            dependencies: [
+                .package(product: "WalletSdk", type: .runtime),
+            ]
         ),
         Target(
             name: "AppUITests",
             destinations: [.iPhone],
             product: .unitTests,
             bundleId: "com.spruceid.wallet.uitests",
-            deploymentTargets: .iOS("14.0"),
+            deploymentTargets: .iOS("16.0"),
             infoPlist: .default,
             sources: ["Targets/AppUI/Tests/**"],
             dependencies: [
