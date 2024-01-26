@@ -35,6 +35,7 @@ func generateQRCode(from data: Data) -> UIImage {
 }
 
 public struct QRSheetView: View {
+    @State var proceed = true
     @Binding var credentials: CredentialStore
     @StateObject var delegate: ShareViewDelegate
     @Environment(\.presentationMode) var presentationMode
@@ -64,13 +65,19 @@ public struct QRSheetView: View {
                 let _ = presentationMode.wrappedValue.dismiss()
                 Text("Success")
             case .selectNamespaces(let items):
-                SelectiveDisclosureView(itemsRequests: items, delegate: delegate)
+                SelectiveDisclosureView(itemsRequests: items, delegate: delegate, proceed: $proceed).onChange(of: proceed) { _p in
+                    self.cancel()
+                }
             }
             Button("Cancel") {
-                self.delegate.cancel(credentials: self.credentials)
-                presentationMode.wrappedValue.dismiss()
+                self.cancel()
             }.padding(10).buttonStyle(.bordered).tint(.red).foregroundColor(.red)
         }
+    }
+    
+    func cancel() {
+        self.delegate.cancel()
+        presentationMode.wrappedValue.dismiss()
     }
 }
 
@@ -84,7 +91,7 @@ class ShareViewDelegate: ObservableObject {
         self.sessionManager = credentials.presentMdocBLE(deviceEngagement: .QRCode, callback: self)!
     }
     
-    func cancel(credentials: CredentialStore) {
+    func cancel() {
         self.sessionManager?.cancel()
     }
     

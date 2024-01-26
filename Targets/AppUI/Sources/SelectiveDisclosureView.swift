@@ -6,9 +6,10 @@ public struct SelectiveDisclosureView: View {
     @State private var showingSDSheet = true
     @State private var itemsSelected: [String: [String: [String: Bool]]]
     @State private var itemsRequests: [ItemsRequest]
+    @Binding var proceed: Bool
     @StateObject var delegate: ShareViewDelegate
     
-    init(itemsRequests: [ItemsRequest], delegate: ShareViewDelegate) {
+    init(itemsRequests: [ItemsRequest], delegate: ShareViewDelegate, proceed: Binding<Bool>) {
         self.itemsRequests = itemsRequests
         self._delegate = StateObject(wrappedValue: delegate)
         var defaultSelected: [String: [String: [String: Bool]]] = [:]
@@ -24,6 +25,7 @@ public struct SelectiveDisclosureView: View {
             defaultSelected[itemRequest.docType] = defaultSelectedNamespaces
         }
         self.itemsSelected = defaultSelected
+        self._proceed = proceed
     }
     
     public var body: some View {
@@ -32,8 +34,10 @@ public struct SelectiveDisclosureView: View {
         }
         .padding(10)
         .buttonStyle(.borderedProminent)
-        .sheet(isPresented: $showingSDSheet, onDismiss: {delegate.submitItems(items: itemsSelected)}) {
-            SDSheetView(itemsSelected: $itemsSelected, itemsRequests: $itemsRequests)
+        .sheet(isPresented: $showingSDSheet, onDismiss: {
+            delegate.submitItems(items: itemsSelected)
+        }) {
+            SDSheetView(itemsSelected: $itemsSelected, itemsRequests: $itemsRequests, proceed: $proceed)
         }
     }
 }
@@ -48,9 +52,9 @@ public struct SelectiveDisclosureView: View {
 
 struct SDSheetView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var playNotificationSounds = false
     @Binding var itemsSelected: [String: [String: [String: Bool]]]
     @Binding var itemsRequests: [ItemsRequest]
+    @Binding var proceed: Bool
     
     public var body: some View {
         NavigationStack {
@@ -77,7 +81,7 @@ struct SDSheetView: View {
             .toolbar(content: {
                 ToolbarItemGroup(placement: .bottomBar) {
                     Button("Cancel", role: .cancel) {
-                        dismiss()
+                        proceed = false
                     }.tint(.red)
                     Button("Share") {
                         dismiss()
