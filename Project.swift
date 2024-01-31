@@ -4,8 +4,8 @@ let project = Project(
     name: "ReferenceWallet",
     organizationName: "spruceid.com",
     packages: [
-        // .package(url: "https://github.com/spruceid/wallet-sdk-swift", from: "0.0.2"),
-        .package(path: "../wallet-sdk-swift")
+        .package(url: "https://github.com/spruceid/wallet-sdk-swift", from: "0.0.3"),
+        // .package(path: "../wallet-sdk-swift")
     ],
     settings: .settings(base: [
         "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
