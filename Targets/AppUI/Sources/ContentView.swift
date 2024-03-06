@@ -1,6 +1,6 @@
 import CryptoKit
 import SwiftUI
-import WalletSdk
+import SpruceIDWalletSdk
 
 public struct ContentView: View {
     @State private var credentials: CredentialStore

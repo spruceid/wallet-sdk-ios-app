@@ -1,6 +1,6 @@
 import CoreImage.CIFilterBuiltins
 import SwiftUI
-import WalletSdk
+import SpruceIDWalletSdk
 
 public struct ShareView: View {
     @Binding var credentials: CredentialStore
@@ -82,12 +82,10 @@ public struct QRSheetView: View {
 }
 
 class ShareViewDelegate: ObservableObject {
-    @Published var state: BLESessionState
+    @Published var state: BLESessionState = .progress("Starting")
     private var sessionManager: BLESessionManager?
     
     init(credentials: CredentialStore) {
-        self.state = .progress("Starting")
-        self.sessionManager = nil
         self.sessionManager = credentials.presentMdocBLE(deviceEngagement: .QRCode, callback: self)!
     }
     

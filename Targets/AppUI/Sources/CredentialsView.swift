@@ -1,5 +1,5 @@
 import SwiftUI
-import WalletSdk
+import SpruceIDWalletSdk
 
 public struct CredentialsView: View {
     @Binding var credentials: CredentialStore

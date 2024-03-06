@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/spruceid/wallet-sdk-rs.git",
       "state" : {
-        "revision" : "756c2f3157f97f995d998027f98dedc47d8dd58e",
-        "version" : "0.0.6"
+        "revision" : "bbae90cd9e5812ffb0e78fc4ce0cb69225cea59d",
+        "version" : "0.0.23"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/spruceid/wallet-sdk-swift",
       "state" : {
-        "revision" : "afe8cc517ffa6085d9c10dadd1c1961ac56d1554",
-        "version" : "0.0.3"
+        "revision" : "29cac2b2fc95dde83d5a0878122dd09ef40f1a6f",
+        "version" : "0.0.4"
       }
     }
   ],

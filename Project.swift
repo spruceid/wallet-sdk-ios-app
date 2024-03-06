@@ -4,7 +4,7 @@ let project = Project(
     name: "ReferenceWallet",
     organizationName: "spruceid.com",
     packages: [
-        .package(url: "https://github.com/spruceid/wallet-sdk-swift", from: "0.0.3"),
+        .package(url: "https://github.com/spruceid/wallet-sdk-swift", from: "0.0.4"),
         // .package(path: "../wallet-sdk-swift")
     ],
     settings: .settings(base: [
@@ -13,7 +13,7 @@ let project = Project(
         "DEVELOPMENT_TEAM": "FZVYR3KYL4"
     ]),
     targets: [
-        Target(
+        .target(
             name: "App",
             destinations: [.iPhone],
             product: .app,
@@ -30,7 +30,7 @@ let project = Project(
                 .target(name: "AppUI"),
             ]
         ),
-        Target(
+        .target(
             name: "AppKit",
             destinations: [.iPhone],
             product: .framework,
@@ -40,7 +40,7 @@ let project = Project(
             sources: ["Targets/AppKit/Sources/**"],
             dependencies: [ ]
         ),
-        Target(
+        .target(
             name: "AppKitTests",
             destinations: [.iPhone],
             product: .unitTests,
@@ -52,7 +52,7 @@ let project = Project(
                 .target(name: "AppKit")
             ]
         ),
-        Target(
+        .target(
             name: "AppUI",
             destinations: [.iPhone],
             product: .framework,
@@ -61,10 +61,10 @@ let project = Project(
             infoPlist: .default,
             sources: ["Targets/AppUI/Sources/**"],
             dependencies: [
-                .package(product: "WalletSdk", type: .runtime),
+                .package(product: "SpruceIDWalletSdk", type: .runtime),
             ]
         ),
-        Target(
+        .target(
             name: "AppUITests",
             destinations: [.iPhone],
             product: .unitTests,
