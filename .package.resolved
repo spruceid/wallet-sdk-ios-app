@@ -1,4 +1,5 @@
 {
+  "originHash" : "3c0609df39bd51bdabc6011de50208cd463458263a36cbc4598df20623d05cbd",
   "pins" : [
     {
       "identity" : "swift-algorithms",
@@ -23,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/spruceid/wallet-sdk-rs.git",
       "state" : {
-        "revision" : "bbae90cd9e5812ffb0e78fc4ce0cb69225cea59d",
-        "version" : "0.0.23"
+        "revision" : "d7426e1382f0538659e4399f74910347f169e91c",
+        "version" : "0.0.25"
       }
     },
     {
@@ -32,10 +33,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/spruceid/wallet-sdk-swift",
       "state" : {
-        "revision" : "29cac2b2fc95dde83d5a0878122dd09ef40f1a6f",
-        "version" : "0.0.4"
+        "revision" : "4586b74dc76016e6aed68659e4fe8ace992ff7bb",
+        "version" : "0.0.5"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
