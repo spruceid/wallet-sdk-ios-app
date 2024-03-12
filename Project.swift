@@ -4,7 +4,7 @@ let project = Project(
     name: "ReferenceWallet",
     organizationName: "spruceid.com",
     packages: [
-        .package(url: "https://github.com/spruceid/wallet-sdk-swift", from: "0.0.5"),
+        .package(url: "https://github.com/spruceid/wallet-sdk-swift", from: "0.0.6"),
         // .package(path: "../wallet-sdk-swift")
     ],
     settings: .settings(base: [
