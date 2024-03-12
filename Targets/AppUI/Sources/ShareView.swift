@@ -1,3 +1,4 @@
+import CoreBluetooth
 import CoreImage.CIFilterBuiltins
 import SwiftUI
 import SpruceIDWalletSdk
@@ -58,9 +59,50 @@ public struct QRSheetView: View {
                         .aspectRatio(contentMode: .fit)
                 }
             case .error(let error):
-                Text(error)
-            case .progress(let message):
+                let message = switch error {
+                case .bluetooth(let central):
+                    switch central.state {
+                            case .poweredOff:
+                                "Is Powered Off."
+                            case .unsupported:
+                                "Is Unsupported."
+                            case .unauthorized:
+                                switch CBManager.authorization {
+                                case .denied:
+                                    "Authorization denied"
+                                case .restricted:
+                                    "Authorization restricted"
+                                case .allowedAlways:
+                                    "Authorized"
+                                case .notDetermined:
+                                    "Authorization not determined"
+                                @unknown default:
+                                    "Unknown authorization error"
+                                }
+                            case .unknown:
+                                "Unknown"
+                            case .resetting:
+                                "Resetting"
+                    case .poweredOn:
+                       "Impossible"
+                    @unknown default:
+                                "Error"
+                            }
+                case .peripheral(let error):
+                    error
+                case .generic(let error):
+                    error
+                }
                 Text(message)
+            case .uploadProgress(let value, let total):
+                ProgressView(value: Double(value), total: Double(total),
+                             label: {
+                    Text("Uploading...").padding(.bottom, 4)
+                }, currentValueLabel: {
+                    Text("\(100 * value/total)%")
+                        .padding(.top, 4)
+                }
+                ).progressViewStyle(.linear)
             case .success:
                 let _ = presentationMode.wrappedValue.dismiss()
                 Text("Success")
@@ -68,6 +110,8 @@ public struct QRSheetView: View {
                 SelectiveDisclosureView(itemsRequests: items, delegate: delegate, proceed: $proceed).onChange(of: proceed) { _p in
                     self.cancel()
                 }
+            case .connected:
+                Text("Connected")
             }
             Button("Cancel") {
                 self.cancel()
@@ -82,7 +126,7 @@ public struct QRSheetView: View {
 }
 
 class ShareViewDelegate: ObservableObject {
-    @Published var state: BLESessionState = .progress("Starting")
+    @Published var state: BLESessionState = .connected
     private var sessionManager: BLESessionManager?
     
     init(credentials: CredentialStore) {
