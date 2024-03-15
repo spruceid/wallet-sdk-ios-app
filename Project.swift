@@ -11,6 +11,7 @@ let project = Project(
         "ENABLE_USER_SCRIPT_SANDBOXING": "YES",
         "ENABLE_MODULE_VERIFIER": "YES",
         "DEVELOPMENT_TEAM": "FZVYR3KYL4"
+        // "CODE_SIGN_IDENTITY": "Spruce Systems, Inc. (FZVYR3KYL4)"
     ]),
     targets: [
         .target(
@@ -20,7 +21,7 @@ let project = Project(
             bundleId: "com.spruceid.wallet",
             deploymentTargets: .iOS("16.0"),
             infoPlist: .extendingDefault(with: [
-                "CFBundleDisplayName": "SpruceID Wallet",
+                "CFBundleDisplayName": "SpruceKit Wallet",
                 "NSBluetoothAlwaysUsageDescription": "Secure transmission of mobile DL data",
                 "UILaunchScreen": [:]
             ]),
@@ -75,6 +76,22 @@ let project = Project(
             dependencies: [
                 .target(name: "AppUI")
             ]
+        )
+    ],
+    schemes: [
+        .scheme(
+            name: "release",
+            shared: true,
+            buildAction: .buildAction(targets: ["App"]),
+            runAction: .runAction(executable: "App"),
+            archiveAction: .archiveAction(configuration: .release)
+        ),
+        .scheme(
+            name: "debug",
+            shared: true,
+            buildAction: .buildAction(targets: ["App"]),
+            runAction: .runAction(executable: "App"),
+            archiveAction: .archiveAction(configuration: .debug)
         )
     ]
 )
