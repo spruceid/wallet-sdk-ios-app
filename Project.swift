@@ -22,6 +22,7 @@ let project = Project(
             deploymentTargets: .iOS("16.0"),
             infoPlist: .extendingDefault(with: [
                 "CFBundleDisplayName": "SpruceKit Wallet",
+                "CFBundlePackageType": "APPL",
                 "NSBluetoothAlwaysUsageDescription": "Secure transmission of mobile DL data",
                 "UILaunchScreen": [:]
             ]),
