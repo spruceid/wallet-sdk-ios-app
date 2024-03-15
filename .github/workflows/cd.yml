@@ -33,13 +33,13 @@ jobs:
       run: tuist generate -n
 
     - name: Import code sign
-      uses: Apple-Actions/import-codesign-certs@v1
+      uses: Apple-Actions/import-codesign-certs@master
       with:
         p12-file-base64: ${{ secrets.APPSTORE_IOS_DISTRIBUTION_CERTIFICATES }}
         p12-password: ${{ secrets.APPSTORE_IOS_DISTRIBUTION_CERTIFICATES_PASSWORD }}
 
     - name: Download provisioning
-      uses: Apple-Actions/download-provisioning-profiles@v1
+      uses: Apple-Actions/download-provisioning-profiles@master
       with:
         bundle-id: com.spruceid.wallet
         issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
@@ -49,7 +49,7 @@ jobs:
     - name: Build and sign archive
       run: |
         # xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="${{ github.ref_name }}" archive -scheme release
-        xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="0.0.0" archive -scheme release CODE_SIGN_IDENTITY="iPhone Distribution"
+        xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="0.0.0" archive -scheme release
         xcodebuild -exportArchive -exportOptionsPlist "Support/ExportOptions.plist" -archivePath "./archive.xcarchive" -exportPath "release.ipa"
 
     - name: Upload to TestFlight
