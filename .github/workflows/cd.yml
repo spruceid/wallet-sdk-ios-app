@@ -25,7 +25,7 @@ jobs:
     - name: Install tools
       uses: jdx/mise-action@v2
     - name: Set up XCode
-      uses: mxcl/xcodebuild@v1
+      uses: mxcl/xcodebuild@v2
       with:
         xcode: 15.2
         action: none
