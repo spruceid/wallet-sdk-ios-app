@@ -32,54 +32,54 @@ let project = Project(
                 "Resources/**"
             ],
             dependencies: [
-                .target(name: "AppKit"),
-                .target(name: "AppUI"),
+                .target(name: "AppAppKit"),
+                .target(name: "AppUIKit"),
             ]
         ),
         .target(
-            name: "AppKit",
+            name: "AppAppKit",
             destinations: [.iPhone],
             product: .framework,
             bundleId: "com.spruceid.wallet.kit",
             deploymentTargets: .iOS("16.0"),
             infoPlist: .default,
-            sources: ["Targets/AppKit/Sources/**"],
+            sources: ["Targets/AppAppKit/Sources/**"],
             dependencies: [ ]
         ),
         .target(
-            name: "AppKitTests",
+            name: "AppAppKitTests",
             destinations: [.iPhone],
             product: .unitTests,
             bundleId: "com.spruceid.wallet.kittests",
             deploymentTargets: .iOS("16.0"),
             infoPlist: .default,
-            sources: ["Targets/AppKit/Tests/**"],
+            sources: ["Targets/AppAppKit/Tests/**"],
             dependencies: [
-                .target(name: "AppKit")
+                .target(name: "AppAppKit")
             ]
         ),
         .target(
-            name: "AppUI",
+            name: "AppUIKit",
             destinations: [.iPhone],
             product: .framework,
             bundleId: "com.spruceid.wallet.ui",
             deploymentTargets: .iOS("16.0"),
             infoPlist: .default,
-            sources: ["Targets/AppUI/Sources/**"],
+            sources: ["Targets/AppUIKit/Sources/**"],
             dependencies: [
                 .package(product: "SpruceIDWalletSdk", type: .runtime),
             ]
         ),
         .target(
-            name: "AppUITests",
+            name: "AppUIKitTests",
             destinations: [.iPhone],
             product: .unitTests,
             bundleId: "com.spruceid.wallet.uitests",
             deploymentTargets: .iOS("16.0"),
             infoPlist: .default,
-            sources: ["Targets/AppUI/Tests/**"],
+            sources: ["Targets/AppUIKit/Tests/**"],
             dependencies: [
-                .target(name: "AppUI")
+                .target(name: "AppUIKit")
             ]
         )
     ],

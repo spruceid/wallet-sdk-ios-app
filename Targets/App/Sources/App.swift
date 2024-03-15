@@ -1,5 +1,5 @@
 import SwiftUI
-import AppUI
+import AppUIKit
 
 @main
 struct AppApp: App {
