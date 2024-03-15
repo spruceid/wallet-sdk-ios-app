@@ -14,6 +14,9 @@ jobs:
     - name: Validate tag is valid
       run: |
         echo "${{ github.ref_name }}" | grep -P '^[0-9]+\.[0-9]+\.[0-9]+$'
+    - name: Validate tag matches project version
+      run: |
+        cat Project.swift | grep -P "${{ github.ref_name }}"
 
   main:
     runs-on: macos-14
@@ -47,7 +50,7 @@ jobs:
 
     - name: Build and sign archive
       run: |
-        xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="${{ github.ref_name }}" archive -scheme release CODE_SIGNING_ALLOWED="NO"
+        xcodebuild -parallelizeTargets -archivePath "./archive" archive -scheme release CODE_SIGNING_ALLOWED="NO"
         xcodebuild -exportArchive -exportOptionsPlist "Support/ExportOptions.plist" -archivePath "./archive.xcarchive" -exportPath "release"
 
     - name: Upload to TestFlight

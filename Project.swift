@@ -21,6 +21,8 @@ let project = Project(
             bundleId: "com.spruceid.wallet",
             deploymentTargets: .iOS("16.0"),
             infoPlist: .extendingDefault(with: [
+                "CFBundleVersion": "0.0.1",
+                "CFBundleShortVersionString": "0.0.1",
                 "CFBundleDisplayName": "SpruceKit Wallet",
                 "CFBundleIconName": "AppIcon",
                 "CFBundlePackageType": "APPL",
