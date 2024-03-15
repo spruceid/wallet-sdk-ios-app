@@ -27,7 +27,8 @@ let project = Project(
                 "CFBundleIconName": "AppIcon",
                 "CFBundlePackageType": "APPL",
                 "NSBluetoothAlwaysUsageDescription": "Secure transmission of mobile DL data",
-                "UILaunchScreen": [:]
+                "UILaunchScreen": [:],
+                "ITSAppUsesNonExemptEncryption": "NO"
             ]),
             sources: ["Targets/App/Sources/**"],
             resources: [
