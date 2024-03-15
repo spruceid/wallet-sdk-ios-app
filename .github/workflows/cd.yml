@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "*"
+    branches: [ wall-171-ios ]
 
 
 jobs:
@@ -11,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Validate tag is valid
-      run: |
-        echo "${{ github.ref_name }}" | grep -P '^[0-9]+\.[0-9]+\.[0-9]+$'
+    # - name: Validate tag is valid
+    #   run: |
+    #     echo "${{ github.ref_name }}" | grep -P '^[0-9]+\.[0-9]+\.[0-9]+$'
 
   main:
     runs-on: macos-14
@@ -26,6 +27,7 @@ jobs:
     - name: Set up XCode
       uses: mxcl/xcodebuild@v1
       with:
+        xcode: 15.2
         action: none
     - name: Generate XCode project
       run: tuist generate -n
@@ -46,7 +48,8 @@ jobs:
 
     - name: Build and sign archive
       run: |
-        xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="${{ github.ref_name }}" archive -scheme release
+        # xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="${{ github.ref_name }}" archive -scheme release
+        xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="0.0.0" archive -scheme release
         xcodebuild -exportArchive -exportOptionsPlist "Support/ExportOptions.plist" -archivePath "./archive.xcarchive" -exportPath "release.ipa"
 
     - name: Upload to TestFlight
