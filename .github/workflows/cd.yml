@@ -50,12 +50,12 @@ jobs:
       run: |
         # xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="${{ github.ref_name }}" archive -scheme release
         xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="0.0.0" archive -scheme release CODE_SIGNING_ALLOWED="NO"
-        xcodebuild -exportArchive -exportOptionsPlist "Support/ExportOptions.plist" -archivePath "./archive.xcarchive" -exportPath "release.ipa"
+        xcodebuild -exportArchive -exportOptionsPlist "Support/ExportOptions.plist" -archivePath "./archive.xcarchive" -exportPath "release"
 
     - name: Upload to TestFlight
       uses: Apple-Actions/upload-testflight-build@master
       with:
-        app-path: release.ipa
+        app-path: release/App.ipa
         issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
         api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
         api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
