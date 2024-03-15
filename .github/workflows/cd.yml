@@ -49,7 +49,7 @@ jobs:
     - name: Build and sign archive
       run: |
         # xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="${{ github.ref_name }}" archive -scheme release
-        xcodebuild -parallelizeTargets -archivePath "./archive" CURRENT_PROJECT_VERSION="0.0.0" archive -scheme release
+        xcodebuild -parallelizeTargets -allowProvisioningUpdates -archivePath "./archive" CURRENT_PROJECT_VERSION="0.0.0" archive -scheme release
         xcodebuild -exportArchive -exportOptionsPlist "Support/ExportOptions.plist" -archivePath "./archive.xcarchive" -exportPath "release.ipa"
 
     - name: Upload to TestFlight
