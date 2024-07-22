@@ -71,3 +71,5 @@ Tuist/Dependencies
 
 # Manually added
 .build
+archive.xcarchive
+Info.plist

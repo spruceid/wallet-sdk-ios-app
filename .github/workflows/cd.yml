@@ -30,9 +30,7 @@ jobs:
       uses: mxcl/xcodebuild@v2
       with:
         xcode: 15.2
-        action: none
-    - name: Generate XCode project
-      run: tuist generate -n
+        platform: iOS
 
     - name: Import code sign
       uses: Apple-Actions/import-codesign-certs@master

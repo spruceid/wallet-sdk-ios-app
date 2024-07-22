@@ -1,0 +1,121 @@
+name: ReferenceWallet
+options:
+  bundleIdPrefix: com.spruceid.wallet
+packages:
+  SpruceIDWalletSdk:
+    url: https://github.com/spruceid/wallet-sdk-swift
+    from: 0.0.8
+    # path: "../wallet-sdk-swift"
+settings:
+  ENABLE_USER_SCRIPT_SANDBOXING: YES
+  ENABLE_MODULE_VERIFIER: YES
+  DEVELOPMENT_TEAM: FZVYR3KYL4
+  # "CODE_SIGN_IDENTITY": "Spruce Systems, Inc. (FZVYR3KYL4)"
+targets:
+  App:
+    type: application
+    supportedDestinations: [iOS]
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: "Targets/App/Sources"
+        createIntermediateGroups: true
+    resources:
+      - path: "Resources"
+        createIntermediateGroups: true
+    dependencies:
+      - target: AppAppKit
+      - target: AppUIKit
+    info:
+      path: Info.plist
+      properties:
+        CFBundleVersion: "0.0.1"
+        CFBundleShortVersionString: "0.0.1"
+        CFBundleDisplayName: "SpruceKit Wallet"
+        CFBundleIconName: "AppIcon"
+        CFBundlePackageType: "APPL"
+        NSBluetoothAlwaysUsageDescription: "Secure transmission of mobile DL data"
+        NSCameraUsageDescription: "Secure transmission of mobile DL data"
+        UILaunchScreen: {}
+        ITSAppUsesNonExemptEncryption: "NO"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.spruceid.wallet
+  AppAppKit:
+    type: framework
+    supportedDestinations: [iOS]
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: "Targets/AppAppKit/Sources"
+        createIntermediateGroups: true
+    settings:
+      base:
+        INFOPLIST_FILE: Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.spruceid.wallet.kit
+  AppAppKitTests:
+    type: bundle.unit-test
+    supportedDestinations: [iOS]
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: "Targets/AppAppKit/Tests"
+        createIntermediateGroups: true
+    dependencies:
+      - target: AppAppKit
+    settings:
+      base:
+        INFOPLIST_FILE: Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.spruceid.wallet.kittests
+  AppUIKit:
+    type: framework
+    supportedDestinations: [iOS]
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: "Targets/AppUIKit/Sources"
+        createIntermediateGroups: true
+    dependencies:
+      - package: SpruceIDWalletSdk
+    settings:
+      base:
+        INFOPLIST_FILE: Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.spruceid.wallet.ui
+  AppUIKitTests:
+    type: bundle.unit-test
+    supportedDestinations: [iOS]
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: "Targets/AppUIKit/Tests"
+        createIntermediateGroups: true
+    dependencies:
+      - target: AppUIKit
+    settings:
+      base:
+        INFOPLIST_FILE: Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.spruceid.wallet.uitests
+configs:
+  debug: debug
+  release: release
+schemes:
+  release:
+    shared: true
+    build:
+      targets:
+        App: [build]
+    run:
+      targets:
+        App: [run]
+    archive:
+      config: release
+  debug:
+    shared: true
+    build:
+      targets:
+        App: [build]
+    run:
+      targets:
+        App: [run]
+    archive:
+      config: debug
