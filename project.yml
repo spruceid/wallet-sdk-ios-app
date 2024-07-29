@@ -4,8 +4,8 @@ options:
 packages:
   SpruceIDWalletSdk:
     url: https://github.com/spruceid/wallet-sdk-swift
-    from: 0.0.8
-    # path: "../wallet-sdk-swift"
+    # from: 0.0.8
+    path: "../wallet-sdk-swift"
 settings:
   ENABLE_USER_SCRIPT_SANDBOXING: YES
   ENABLE_MODULE_VERIFIER: YES
