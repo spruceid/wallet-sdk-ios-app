@@ -1,7 +1,7 @@
 import CoreBluetooth
 import CoreImage.CIFilterBuiltins
 import SwiftUI
-import SpruceIDWalletSdk
+import SpruceIDMobileSdk
 
 public struct ShareView: View {
     @Binding var credentials: CredentialStore
