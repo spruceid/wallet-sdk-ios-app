@@ -31,7 +31,7 @@ targets:
       properties:
         CFBundleVersion: "0.0.2"
         CFBundleShortVersionString: "0.0.2"
-        CFBundleDisplayName: "SpruceKit Mobile"
+        CFBundleDisplayName: "SpruceKit Reference App"
         CFBundleIconName: "AppIcon"
         CFBundlePackageType: "APPL"
         NSBluetoothAlwaysUsageDescription: "Secure transmission of mobile DL data"

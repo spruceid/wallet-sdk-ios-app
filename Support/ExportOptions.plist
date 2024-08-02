@@ -11,7 +11,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.spruceid.mobile</key>
-		<string>SpruceKit Mobile profile</string>
+		<string>SpruceKit Reference App profile</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>iPhone Distribution</string>
