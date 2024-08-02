@@ -1,6 +1,6 @@
 import CryptoKit
 import SwiftUI
-import SpruceIDWalletSdk
+import SpruceIDMobileSdk
 
 public struct ContentView: View {
     @State private var credentials: CredentialStore
@@ -14,7 +14,7 @@ public struct ContentView: View {
         TabView {
             CredentialsView(credentials: $credentials)
                 .tabItem {
-                    Label("Credentials", systemImage: "wallet.pass.fill")
+                    Label("Credentials", systemImage: "mobile.pass.fill")
                 }
             ShareView(credentials: $credentials)
                 .tabItem {

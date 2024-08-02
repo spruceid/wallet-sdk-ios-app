@@ -1,6 +1,6 @@
 import SwiftUI
 import UniformTypeIdentifiers
-import SpruceIDWalletSdk
+import SpruceIDMobileSdk
 
 public struct SelectiveDisclosureView: View {
     @State private var showingSDSheet = true
