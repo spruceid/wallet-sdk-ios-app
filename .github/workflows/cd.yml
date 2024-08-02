@@ -31,6 +31,9 @@ jobs:
       with:
         xcode: 15.2
         platform: iOS
+        action: none
+    - name: Generate XCode project
+      uses: xavierLowmiller/xcodegen-action@1.2.2
 
     - name: Import code sign
       uses: Apple-Actions/import-codesign-certs@master
