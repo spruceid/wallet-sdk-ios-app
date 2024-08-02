@@ -103,7 +103,7 @@ schemes:
     shared: true
     build:
       targets:
-        App: [build]
+        App: [build, archive]
     run:
       targets:
         App: [run]
@@ -113,7 +113,7 @@ schemes:
     shared: true
     build:
       targets:
-        App: [build]
+        App: [build, archive]
     run:
       targets:
         App: [run]
