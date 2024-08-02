@@ -1,4 +1,4 @@
-name: ReferenceMobile
+name: ReferenceApp
 options:
   bundleIdPrefix: com.spruceid.mobile
 packages:
