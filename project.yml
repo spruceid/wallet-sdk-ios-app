@@ -20,7 +20,6 @@ targets:
     sources:
       - path: "Targets/App/Sources"
         createIntermediateGroups: true
-    resources:
       - path: "Resources"
         createIntermediateGroups: true
     dependencies:
