@@ -1,4 +1,4 @@
-iOS Test App for `mobile-sdk-swift`
+# iOS Test App for `mobile-sdk-swift`
 
 To generate the XCode project for this:
 
